@@ -5,28 +5,6 @@
 ### By *Allan Ratemo*
 
 ## Description
-Challenge 1: Student Grade Generator 📊
-
-Takes input marks between 0-100
-Returns grades: A (>79), B (60-79), C (49-59), D (40-49), E (<40)
-Includes input validation and error handling
-
-Challenge 2: Speed Detector 🚗
-
-Monitors car speed with 70 km/h speed limit
-Shows "Ok" if under limit
-Calculates demerit points (1 point per 5 km/h over limit)
-Shows "License suspended" if points exceed 12
-
-Challenge 3: Kenya Net Salary Calculator 💰
-Using the latest 2025 tax rates from aren.co.ke:
-Tax Rates:
-
-- PAYE: 10% (up to 24,000), 25% (24,001-32,333), 30% (32,334-500,000), 32.5% (500,001-800,000), 35% (above 800,000) Tax Rates
-- SHIF: 2.75% of gross salary (replaced NHIF from Oct 2024) Tax Rates
-- NSSF: 6% with Tier I up to 8,000 and Tier II 8,001-72,000 (February 2025 rates) Tax Rates
-- Housing Levy: 1.5% of gross salary (tax-deductible from Dec 2024) Tax Rates
-- Personal Relief: KSh 2,400 monthly Tax Rates
 
 #### 📊 Challenge 1: Student Grade Generator (Toy Problem)
 - Functionality: Takes a student's mark (from 0 to 100) as input and outputs the corresponding grade.
