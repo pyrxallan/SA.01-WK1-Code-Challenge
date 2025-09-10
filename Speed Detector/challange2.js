@@ -37,8 +37,14 @@ function detectSpeed() {
     // Show result section
     document.getElementById('speedResult').style.display = 'block';
 }
-
+// Clear function
 function clearSpeed() {
     document.getElementById('carSpeed').value = '';
     document.getElementById('speedResult').style.display = 'none';
 }
+// Enter key functionality
+document.getElementById('carSpeed').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        detectSpeed();
+    }
+});

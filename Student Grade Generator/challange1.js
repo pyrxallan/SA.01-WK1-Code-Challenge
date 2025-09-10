@@ -32,3 +32,15 @@ function generateGrade() {
     // Show result section
     document.getElementById('gradeResult').style.display = 'block';
 }
+
+function clearGrade() {
+    document.getElementById('studentMark').value = '';
+    document.getElementById('gradeResult').style.display = 'none';
+}
+
+// Enter key functionality
+document.getElementById('studentMark').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        generateGrade();
+    }
+});

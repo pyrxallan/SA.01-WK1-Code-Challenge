@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>student Grade Generator</title>
+    <title>Student Grade Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,16 +21,22 @@
         <hr>
         
         <div class="buttons">
-            <button onclick="generateGrade()">GENERATE GRADE</button>   
+            <button onclick="generateGrade()">
+                GENERATE GRADE
+            </button>
+            <button id="clear-btn" onclick="clearGrade()">
+                CLEAR
+            </button>
         </div>
         
         <div id="gradeResult" class="result">
+            <div class="result-title">GRADE RESULT</div>
             <div class="grade-display" id="gradeDisplay">C</div>
             <div class="score-display" id="scoreDisplay">Score: 50/100</div>
         </div>
         
         <div class="akatsuki-footer">
-            <p>Allan Ratemo &copy; 2025</p>
+            <p>Developed by Allan Ratemo | Inspired by Naruto's Akatsuki</p>
         </div>
     </div>
 
