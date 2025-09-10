@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Salary Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="akatsuki-header">
+            <h1>CHALLENGE III: NET SALARY CALCULATOR</h1>
+            <h2>Kenya (2025)</h2>
+        </div>
+        
+        <div class="input-group">
+            <label for="basicSalary">Enter basic salary (KSh):</label>
+            <input type="number" id="basicSalary" min="0" placeholder="Enter basic salary in KSh">
+        </div>
+        
+        <div class="input-group">
+            <label for="benefits">Enter total benefits (KSh) - Optional:</label>
+            <input type="number" id="benefits" min="0" placeholder="Enter benefits (house allowance, etc.)">
+        </div>
+        
+        <hr>
+        
+        <div class="buttons">
+            <button onclick="calculateNetSalary()">
+                <i class="fas fa-calculator"></i> CALCULATE SALARY
+            </button>
+            <button id="clear-btn" onclick="clearSalary()">
+                <i class="fas fa-broom"></i> CLEAR
+            </button>
+        </div>
+        
+        <div id="salaryResult" class="result">
+            <div class="result-title">SALARY BREAKDOWN</div>
+            <div class="result-item">
+                <span class="label">Gross Salary:</span>
+                <span class="value" id="grossSalary">KSh 0</span>
+            </div>
+            <div class="result-item">
+                <span class="label">PAYE (Tax):</span>
+                <span class="value" id="paye">KSh 0</span>
+            </div>
+            <div class="result-item">
+                <span class="label">NHIF Deductions:</span>
+                <span class="value" id="nhif">KSh 0</span>
+            </div>
+            <div class="result-item">
+                <span class="label">NSSF Deductions:</span>
+                <span class="value" id="nssf">KSh 0</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Housing Levy:</span>
+                <span class="value" id="housingLevy">KSh 0</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Net Salary:</span>
+                <span class="value" id="netSalary">KSh 0</span>
+            </div>
+        </div>
+        
+        <div class="akatsuki-footer">
+            <p>Developed by Allan Ratemo | Inspired by Naruto's Akatsuki</p>
+        </div>
+    </div>
+
+    <script src="challange3.js"></script>
+</body>
+</html>

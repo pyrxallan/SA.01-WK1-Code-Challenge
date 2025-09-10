@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Detector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="akatsuki-header">
+            <h1>CHALLENGE II: SPEED DETECTOR</h1>
+        </div>
+        
+        <div class="input-group">
+            <label for="carSpeed">Enter car speed (km/h):</label>
+            <input type="number" id="carSpeed" placeholder="Enter speed in km/h">
+        </div>
+        
+        <hr>
+        
+        <div class="buttons">
+            <button onclick="detectSpeed()">
+                <i class="fas fa-radar"></i> CHECK SPEED
+            </button>
+            <button id="clear-btn" onclick="clearSpeed()">
+                <i class="fas fa-broom"></i> CLEAR
+            </button>
+        </div>
+        
+        <div id="speedResult" class="result">
+            <div class="result-title">SPEED ANALYSIS</div>
+            <div class="speed-status" id="speedStatus">OK</div>
+            <div class="demerit-points" id="demeritPoints">Demerit Points: 0</div>
+        </div>
+        
+        <div class="akatsuki-footer">
+            <p>Developed by Allan Ratemo | Inspired by Naruto's Akatsuki</p>
+    </div>
+
+<script src="challange2.js"></script>
+</body>
+</html>

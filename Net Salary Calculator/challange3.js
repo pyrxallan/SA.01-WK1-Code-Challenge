@@ -1,120 +1,86 @@
-// Challenge 3: Kenya Net Salary Calculator (2025 rates)
 function calculateNetSalary() {
-    const basicSalary = parseFloat(document.getElementById('basicSalary').value);
+    // Get input values
+    const basicSalary = parseFloat(document.getElementById('basicSalary').value) || 0;
     const benefits = parseFloat(document.getElementById('benefits').value) || 0;
-    const resultDiv = document.getElementById('salaryResult');
-    
-    if (isNaN(basicSalary) || basicSalary <= 0) {
-        resultDiv.innerHTML = '❌ Please enter a valid basic salary';
-        resultDiv.className = 'result error';
-        resultDiv.style.display = 'flex';
-        return;
-    }
-
     const grossSalary = basicSalary + benefits;
-
-    // NSSF Calculation (February 2025 rates: Tier I up to 8,000, Tier II 8,001-72,000)
-    let nssf = 0;
-    if (grossSalary <= 8000) {
-        nssf = grossSalary * 0.06; // 6% of gross salary for Tier I
-    } else if (grossSalary <= 72000) {
-        nssf = (8000 * 0.06) + ((grossSalary - 8000) * 0.06); // Tier I + Tier II
-    } else {
-        nssf = (8000 * 0.06) + ((72000 - 8000) * 0.06); // Maximum NSSF
-    }
     
-    // SHIF Calculation (2.75% of gross salary, minimum 300)
-    let shif = grossSalary * 0.0275;
-    if (shif < 300) shif = 300;
-    
-    // Housing Levy (1.5% of gross salary, max 5,000 - tax deductible from Dec 2024)
-    let housingLevy = grossSalary * 0.015;
-    if (housingLevy > 5000) housingLevy = 5000;
-    
-    // Taxable income (gross - NSSF - SHIF - Housing Levy)
-    const taxableIncome = grossSalary - nssf - shif - housingLevy;
-    
-    // PAYE Tax calculation using 2025 brackets
-    let paye = 0;
-    const personalRelief = 2400; // Monthly personal relief
-    
-    if (taxableIncome > 24000) {
-        // First band: 0-24,000 at 10%
-        paye += 24000 * 0.10;
-        
-        if (taxableIncome > 32333) {
-            // Second band: 24,001-32,333 at 25%
-            paye += (32333 - 24000) * 0.25;
-            
-            if (taxableIncome > 500000) {
-                // Third band: 32,334-500,000 at 30%
-                paye += (500000 - 32333) * 0.30;
-                
-                if (taxableIncome > 800000) {
-                    // Fourth band: 500,001-800,000 at 32.5%
-                    paye += (800000 - 500000) * 0.325;
-                    
-                    // Fifth band: Above 800,000 at 35%
-                    paye += (taxableIncome - 800000) * 0.35;
-                } else {
-                    paye += (taxableIncome - 500000) * 0.325;
-                }
-            } else {
-                paye += (taxableIncome - 32333) * 0.30;
-            }
-        } else {
-            paye += (taxableIncome - 24000) * 0.25;
-        }
-    } else {
-        paye = taxableIncome * 0.10;
-    }
-    
-    // Apply personal relief
-    paye = Math.max(0, paye - personalRelief);
+    // Calculate deductions (simplified for demonstration)
+    const paye = calculatePAYE(grossSalary);
+    const nhif = calculateNHIF(grossSalary);
+    const nssf = calculateNSSF(grossSalary);
+    const housingLevy = grossSalary * 0.015; // 1.5% housing levy
     
     // Calculate net salary
-    const netSalary = grossSalary - nssf - shif - housingLevy - paye;
+    const totalDeductions = paye + nhif + nssf + housingLevy;
+    const netSalary = grossSalary - totalDeductions;
     
     // Display results
-    resultDiv.innerHTML = `
-        <div class="salary-breakdown">
-            <div class="breakdown-item">
-                <span>Gross Salary</span>
-                <strong>KSh ${grossSalary.toLocaleString()}</strong>
-            </div>
-            <div class="breakdown-item">
-                <span>NSSF (6%)</span>
-                <strong>KSh ${nssf.toLocaleString()}</strong>
-            </div>
-            <div class="breakdown-item">
-                <span>SHIF (2.75%)</span>
-                <strong>KSh ${shif.toLocaleString()}</strong>
-            </div>
-            <div class="breakdown-item">
-                <span>Housing Levy (1.5%)</span>
-                <strong>KSh ${housingLevy.toLocaleString()}</strong>
-            </div>
-            <div class="breakdown-item">
-                <span>Taxable Income</span>
-                <strong>KSh ${taxableIncome.toLocaleString()}</strong>
-            </div>
-            <div class="breakdown-item">
-                <span>PAYE Tax</span>
-                <strong>KSh ${paye.toLocaleString()}</strong>
-            </div>
-            <div class="breakdown-item" style="background: #e8f5e8; border-left-color: #28a745;">
-                <span>NET SALARY</span>
-                <strong style="color: #28a745; font-size: 1.3em;">KSh ${netSalary.toLocaleString()}</strong>
-            </div>
-        </div>
-    `;
-    resultDiv.className = 'result success';
-    resultDiv.style.display = 'block';
+    document.getElementById('grossSalary').textContent = `KSh ${grossSalary.toLocaleString()}`;
+    document.getElementById('paye').textContent = `KSh ${paye.toLocaleString()}`;
+    document.getElementById('nhif').textContent = `KSh ${nhif.toLocaleString()}`;
+    document.getElementById('nssf').textContent = `KSh ${nssf.toLocaleString()}`;
+    document.getElementById('housingLevy').textContent = `KSh ${housingLevy.toLocaleString()}`;
+    document.getElementById('netSalary').textContent = `KSh ${netSalary.toLocaleString()}`;
+    
+    // Show result section
+    document.getElementById('salaryResult').style.display = 'block';
 }
 
-// Clear input and result
 function clearSalary() {
     document.getElementById('basicSalary').value = '';
     document.getElementById('benefits').value = '';
     document.getElementById('salaryResult').style.display = 'none';
 }
+
+// Simplified tax calculation for demonstration
+function calculatePAYE(salary) {
+    if (salary <= 24000) return salary * 0.1;
+    if (salary <= 32333) return salary * 0.25;
+    return salary * 0.3;
+}
+
+// Simplified NHIF calculation
+function calculateNHIF(salary) {
+    if (salary <= 5999) return 150;
+    if (salary <= 7999) return 300;
+    if (salary <= 11999) return 400;
+    if (salary <= 14999) return 500;
+    if (salary <= 19999) return 600;
+    if (salary <= 24999) return 750;
+    if (salary <= 29999) return 850;
+    if (salary <= 34999) return 900;
+    if (salary <= 39999) return 950;
+    if (salary <= 44999) return 1000;
+    if (salary <= 49999) return 1100;
+    if (salary <= 59999) return 1200;
+    if (salary <= 69999) return 1300;
+    if (salary <= 79999) return 1400;
+    if (salary <= 89999) return 1500;
+    if (salary <= 99999) return 1600;
+    return 1700;
+}
+
+// Simplified NSSF calculation
+function calculateNSSF(salary) {
+    const tier1 = 6000;
+    const tier2 = 18000 - tier1;
+    
+    if (salary <= tier1) return salary * 0.06;
+    if (salary <= 18000) return (tier1 * 0.06) + ((salary - tier1) * 0.06);
+    return (tier1 * 0.06) + (tier2 * 0.06);
+}
+
+// Enter key functionality
+document.getElementById('basicSalary').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('benefits').focus();
+    }
+});
+
+document.getElementById('benefits').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        calculateNetSalary();
+    }
+});

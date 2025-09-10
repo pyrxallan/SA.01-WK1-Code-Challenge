@@ -1,38 +1,44 @@
-// Challenge 1: Student Grade Generator
-function generateGrade() {
-    const mark = parseFloat(document.getElementById('studentMark').value);
-    const resultDiv = document.getElementById('gradeResult');
+function detectSpeed() {
+    // Get input value
+    const speedInput = document.getElementById('carSpeed');
+    const speed = parseFloat(speedInput.value);
     
-    // Input validation
-    if (isNaN(mark) || mark < 0 || mark > 100) {
-        resultDiv.innerHTML = '❌ Please enter a valid mark between 0 and 100';
-        resultDiv.className = 'result error';
-        resultDiv.style.display = 'flex';
+    // Validate input
+    if (isNaN(speed) || speed < 0) {
+        alert("Please enter a valid speed.");
+        speedInput.focus();
         return;
     }
     
-    // Grade determination
-    let grade;
-    if (mark > 79) {
-        grade = 'A';
-    } else if (mark >= 60) {
-        grade = 'B';
-    } else if (mark >= 49) {
-        grade = 'C';
-    } else if (mark >= 40) {
-        grade = 'D';
+    // Constants
+    const speedLimit = 70;
+    const kmPerDemeritPoint = 5;
+    
+    // Calculate demerit points
+    let status, demeritPoints;
+    
+    if (speed <= speedLimit) {
+        status = "OK";
+        demeritPoints = 0;
     } else {
-        grade = 'E';
+        demeritPoints = Math.floor((speed - speedLimit) / kmPerDemeritPoint);
+        
+        if (demeritPoints > 12) {
+            status = "LICENSE SUSPENDED";
+        } else {
+            status = "OVER LIMIT";
+        }
     }
     
-    // Display result
-    resultDiv.innerHTML = `Grade: <strong>${grade}</strong>`;
-    resultDiv.className = 'result success';
-    resultDiv.style.display = 'flex';
+    // Display results
+    document.getElementById('speedStatus').textContent = status;
+    document.getElementById('demeritPoints').textContent = `Demerit Points: ${demeritPoints}`;
+    
+    // Show result section
+    document.getElementById('speedResult').style.display = 'block';
 }
 
-// Clear input and result
-function clearGrade() {
-    document.getElementById('studentMark').value = '';
-    document.getElementById('gradeResult').style.display = 'none';
+function clearSpeed() {
+    document.getElementById('carSpeed').value = '';
+    document.getElementById('speedResult').style.display = 'none';
 }

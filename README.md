@@ -6,6 +6,7 @@
 
 ## Description
 
+This project features
 #### 📊 Challenge 1: Student Grade Generator (Toy Problem)
 - Functionality: Takes a student's mark (from 0 to 100) as input and outputs the corresponding grade.
 
@@ -25,7 +26,7 @@
 
 
 #### 🚗 Challenge 2: Speed Detector (Toy Problem)
--Functionality: Calculates demerit points for a car's speed based on a 70 km/h speed limit.
+- Functionality: Calculates demerit points for a car's speed based on a 70 km/h speed limit.
 
 - Logic:
 

@@ -1,39 +1,34 @@
-// Challenge 2: Speed Detector
-function detectSpeed() {
-    const speed = parseFloat(document.getElementById('carSpeed').value);
-    const resultDiv = document.getElementById('speedResult');   // Result display div
-    const speedLimit = 70;
+function generateGrade() {
+    // Get input value
+    const markInput = document.getElementById('studentMark');
+    const mark = parseFloat(markInput.value);
     
-    // Input validation
-    if (isNaN(speed) || speed < 0) {
-        resultDiv.innerHTML = '❌ Please enter a valid speed';
-        resultDiv.className = 'result error';
-        resultDiv.style.display = 'flex';
+    // Validate input
+    if (isNaN(mark) || mark < 0 || mark > 100) {
+        alert("Please enter a valid mark between 0 and 100.");
+        markInput.focus();
         return;
     }
     
-    // Speed detection logic
-    if (speed < speedLimit) {
-        resultDiv.innerHTML = '✅ Ok - Speed is within limit'; // No points
-        resultDiv.className = 'result success'; // Green
+    // Determine grade
+    let grade;
+    
+    if (mark > 79) {
+        grade = "A";
+    } else if (mark >= 60) {
+        grade = "B";
+    } else if (mark >= 49) {
+        grade = "C";
+    } else if (mark >= 40) {
+        grade = "D";
     } else {
-        const excessSpeed = speed - speedLimit;
-        const demeritPoints = Math.floor(excessSpeed / 5);
-        
-        if (demeritPoints > 12) {
-            resultDiv.innerHTML = `🚫 License suspended! Points: ${demeritPoints} (Speed: ${speed} km/h)`;
-            resultDiv.className = 'result error';
-        } else {
-            resultDiv.innerHTML = `⚠️ Points: ${demeritPoints} (Speed: ${speed} km/h, Excess: ${excessSpeed} km/h)`;
-            resultDiv.className = 'result warning';
-        }
+        grade = "E";
     }
-    // Display result
-    resultDiv.style.display = 'flex';
-}
-
-// Clear input and result
-function clearSpeed() {
-    document.getElementById('carSpeed').value = ''; // Clear input
-    document.getElementById('speedResult').style.display = 'none'; // Hide result
+    
+    // Display results
+    document.getElementById('gradeDisplay').textContent = grade;
+    document.getElementById('scoreDisplay').textContent = `Score: ${mark}/100`;
+    
+    // Show result section
+    document.getElementById('gradeResult').style.display = 'block';
 }
