@@ -6,7 +6,8 @@
 
 ## Description
 
-This project features
+This repository features three code challenges that have been explained below.
+
 #### 📊 Challenge 1: Student Grade Generator (Toy Problem)
 - Functionality: Takes a student's mark (from 0 to 100) as input and outputs the corresponding grade.
 
